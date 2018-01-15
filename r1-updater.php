@@ -16,5 +16,11 @@ function require_auth() {
   }
 }
 require_auth();
-echo "secret1";
+
+if (!isset($_POST['data'])) {
+  die;
+}
+
+
+
 ?>
