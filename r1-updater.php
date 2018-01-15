@@ -1,4 +1,6 @@
 <?php 
+error_reporting(E_ALL);
+ini_set('display_errors', 'on');
 function require_auth() {
   $AUTH_USER = 'admin';
   $AUTH_PASS = 'qwe123';
@@ -26,7 +28,7 @@ if (!isset($_POST['data'])) {
 else echo "data !!\n";
 var_dump($_POST['data']);
 
-require("connetion.php");
+require("./connetion.php");
 $stmt = $pdo->prepare('SELECT * FROM 123');
 $stmt->execute();
 var_dump($stmt);
