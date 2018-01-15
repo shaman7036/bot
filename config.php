@@ -8,5 +8,7 @@ return [
     'webhookUrl' => 'https://r1sport.by/bot/bot.php',
     'dbname' => 'u29765nr_bot',
     'username' => 'u29765nr',
-    'pass' => 'yFGHbdjpujh1'
+    'pass' => 'ijRsPS8O'
 ];
+
+//u29765nr_r1sport
