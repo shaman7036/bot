@@ -45,10 +45,10 @@ foreach(preg_split("/((\r?\n)|(\r\n?))/", $received_data) as $line){
     'phone_number' => $temparr[4]
   );
 } 
- var_dump($arr);
+ // var_dump($arr);
+ require("./connection.php");
  pdoMultiInsert('user_data', $arr, $pdo);
 
-// require("./connection.php");
 // $stmt = $pdo->prepare("INSERT INTO  `user_data` (phone_number) VALUES (:phone_number)");
 // $stmt->bindParam(':phone_number', $_POST['data']);
 // $stmt->execute();
