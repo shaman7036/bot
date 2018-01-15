@@ -9,7 +9,7 @@ var_dump($pass);
 var_dump($dbname);
 try {
     $dbh = new PDO("mysqli:host=localhost;dbname=$dbname", $user, $pass);
-    $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION)
+    $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     die(json_encode(array('outcome' => true)));
 }
 catch(PDOException $ex){
