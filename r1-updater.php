@@ -24,7 +24,7 @@ if (!isset($_POST['data'])) {
   die;
 }
 else echo "data !!\n";
-require("./connection.php");
+require('./connection.php');
 
 var_dump($_POST['data']);
 
@@ -48,7 +48,7 @@ foreach(preg_split("/((\r?\n)|(\r\n?))/", $received_data) as $line){
   );
 } 
  // var_dump($arr);
- pdoMultiInsert('user_data', $arr, $pdo);
+pdoMultiInsert('user_data', $arr, $pdo);
 
 // $stmt = $pdo->prepare("INSERT INTO  `user_data` (phone_number) VALUES (:phone_number)");
 // $stmt->bindParam(':phone_number', $_POST['data']);
