@@ -37,7 +37,7 @@ $received_data = trim($_POST['data']);
 $arr = [];
 foreach(preg_split("/((\r?\n)|(\r\n?))/", $received_data) as $line){
   $temparr = explode("|", $line);
-  $newarr = array(
+  $arr[] = array(
     'id' => $temparr[0],
     'visits_left' => $temparr[1],
     'deposit_account' => $temparr[2],
