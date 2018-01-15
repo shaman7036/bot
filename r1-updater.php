@@ -20,13 +20,15 @@ function require_auth() {
   }
 }
 require_auth();
-
-echo "secret";
 if (!isset($_POST['data'])) {
   die;
 }
 else echo "data !!\n";
 var_dump($_POST['data']);
+
+//OID = id
+//TelefoneCell = phone_number
+//LastVisitDateTime = last_visit
 
 require("./connection.php");
 $stmt = $pdo->prepare('SELECT * FROM `123`');
