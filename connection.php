@@ -1,5 +1,5 @@
 <?php 
-$config = require('./config.php')
+$config = require('./config.php');
 $user = $config['dbname'];
 $pass = $config['username'];
 $dbname = $config['pass'];
