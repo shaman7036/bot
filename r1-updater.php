@@ -15,7 +15,6 @@ function require_auth() {
     header('HTTP/1.1 401 Authorization Required');
     header('WWW-Authenticate: Basic realm="Access denied"');
     echo "no access";
-    
     exit;
   }
 }
@@ -23,11 +22,7 @@ require_auth();
 if (!isset($_POST['data'])) {
   die;
 }
-else echo "data !!\n";
 require('./connection.php');
-
-var_dump($_POST['data']);
-
 //id|visits_left|deposit_account|last_visit|phone_number
 //OID = id
 //??? = visits_left
@@ -47,13 +42,11 @@ foreach(preg_split("/((\r?\n)|(\r\n?))/", $received_data) as $line){
     'phone_number' => $temparr[4]
   );
 } 
- // var_dump($arr);
 pdoMultiInsert('user_data', $arr, $pdo);
-
-// $stmt = $pdo->prepare("INSERT INTO  `user_data` (phone_number) VALUES (:phone_number)");
-// $stmt->bindParam(':phone_number', $_POST['data']);
+echo "done.";
+// $stmt = $pdo->prepare("SELECT * FROM user_data WHERE phone_number= )");
 // $stmt->execute();
-// var_dump($stmt);
+// var_dump($stmt->fetchAll());
 
 
 function pdoMultiInsert($tableName, $data, $pdoObject){
