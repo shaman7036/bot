@@ -16,5 +16,5 @@ function require_auth() {
   }
 }
 require_auth();
-echo "secret";
+echo "secret1";
 ?>
