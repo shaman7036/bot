@@ -31,8 +31,8 @@ var_dump($_POST['data']);
 //LastVisitDateTime = last_visit
 
 require("./connection.php");
-$stmt = $pdo->prepare("INSERT INTO  `userdata` (`phone_number`) VALUES  $_POST['data']");
+$stmt = $pdo->prepare("INSERT INTO  `user_data` (phone_number) VALUES (:phone_number)");
+$stmt->bindParam(':phone_number', $_POST['data']);
 $stmt->execute();
-$result = $stmt->fetchAll();
-var_dump($result);
+var_dump($stmt);
 ?>
