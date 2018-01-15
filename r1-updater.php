@@ -20,6 +20,8 @@ function require_auth() {
   }
 }
 require_auth();
+else echo "data !!\n";
+var_dump($_POST['data']);
 if (!isset($_POST['data'])) {
   die;
 }
