@@ -31,5 +31,6 @@ var_dump($_POST['data']);
 require("./connection.php");
 $stmt = $pdo->prepare('SELECT * FROM `123`');
 $stmt->execute();
-var_dump($stmt);
+$result = $stmt->fetchAll();
+var_dump($result);
 ?>
