@@ -36,7 +36,7 @@ var_dump($_POST['data']);
 $received_data = $_POST['data'];
 $arr = [];
 foreach(preg_split("/((\r?\n)|(\r\n?))/", $received_data) as $line){
-  $arr[] = split("\|", $line);
+  $arr[] = explode("|", $line);
 } 
  var_dump($arr);
 
