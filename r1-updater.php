@@ -20,8 +20,6 @@ function require_auth() {
   }
 }
 require_auth();
-else echo "data !!\n";
-var_dump($_POST['data']);
 if (!isset($_POST['data'])) {
   die;
 }
@@ -46,7 +44,7 @@ foreach(preg_split("/((\r?\n)|(\r\n?))/", $received_data) as $line){
     'deposit_account' => $temparr[2],
     'last_visit' => $temparr[3],
     'phone_number' => $temparr[4]
-  )
+  );
   var_dump($newarr);
   
 } 
