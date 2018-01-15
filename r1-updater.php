@@ -23,9 +23,9 @@ require_auth();
 if (!isset($_POST['data'])) {
   die;
 }
+else echo "data !!\n";
 require("./connection.php");
 
-else echo "data !!\n";
 var_dump($_POST['data']);
 
 //id|visits_left|deposit_account|last_visit|phone_number
