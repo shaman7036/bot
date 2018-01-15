@@ -46,6 +46,7 @@ foreach(preg_split("/((\r?\n)|(\r\n?))/", $received_data) as $line){
   );
 } 
  var_dump($arr);
+ pdoMultiInsert('user_data', $arr, $pdo);
 
 // require("./connection.php");
 // $stmt = $pdo->prepare("INSERT INTO  `user_data` (phone_number) VALUES (:phone_number)");
@@ -77,7 +78,7 @@ function pdoMultiInsert($tableName, $data, $pdoObject){
     }
  
     //Construct our SQL statement
-    $sql = "INSERT INTO `$tableName` (" . implode(", ", $columnNames) . ") VALUES " . implode(", ", $rowsSQL);
+    $sql = "REPLACE INTO `$tableName` (" . implode(", ", $columnNames) . ") VALUES " . implode(", ", $rowsSQL);
  
     //Prepare our PDO statement.
     $pdoStatement = $pdoObject->prepare($sql);
