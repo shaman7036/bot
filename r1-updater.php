@@ -12,15 +12,16 @@ function require_auth() {
   if ($is_not_authenticated) {
     header('HTTP/1.1 401 Authorization Required');
     header('WWW-Authenticate: Basic realm="Access denied"');
+    echo "no access";
+    
     exit;
   }
 }
 require_auth();
 
+echo "secret";
 if (!isset($_POST['data'])) {
   die;
 }
-
-
 
 ?>
