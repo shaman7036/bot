@@ -28,7 +28,7 @@ if (!isset($_POST['data'])) {
 else echo "data !!\n";
 var_dump($_POST['data']);
 
-require("./connetion.php");
+require("./connection.php");
 $stmt = $pdo->prepare('SELECT * FROM 123');
 $stmt->execute();
 var_dump($stmt);
