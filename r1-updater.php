@@ -26,13 +26,23 @@ if (!isset($_POST['data'])) {
 else echo "data !!\n";
 var_dump($_POST['data']);
 
+//id|visits_left|deposit_account|last_visit|phone_number
 //OID = id
-//TelefoneCell = phone_number
+//??? = visits_left
+//??? = deposit_account
 //LastVisitDateTime = last_visit
+//TelefoneCell = phone_number
 
-require("./connection.php");
-$stmt = $pdo->prepare("INSERT INTO  `user_data` (phone_number) VALUES (:phone_number)");
-$stmt->bindParam(':phone_number', $_POST['data']);
-$stmt->execute();
-var_dump($stmt);
+$received_data = $_POST['data'];
+$arr = [];
+foreach(preg_split("/((\r?\n)|(\r\n?))/", $received_data) as $line){
+  $arr[] = split("|", $line);
+} 
+ var_dump($arr);
+
+// require("./connection.php");
+// $stmt = $pdo->prepare("INSERT INTO  `user_data` (phone_number) VALUES (:phone_number)");
+// $stmt->bindParam(':phone_number', $_POST['data']);
+// $stmt->execute();
+// var_dump($stmt);
 ?>
