@@ -31,7 +31,7 @@ var_dump($_POST['data']);
 //LastVisitDateTime = last_visit
 
 require("./connection.php");
-$stmt = $pdo->prepare('SELECT * FROM `123`');
+$stmt = $pdo->prepare("INSERT INTO  `userdata` (`phone_number`) VALUES  $_POST['data']");
 $stmt->execute();
 $result = $stmt->fetchAll();
 var_dump($result);
