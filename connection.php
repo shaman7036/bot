@@ -1,12 +1,9 @@
 <?php 
 $config = require('./config.php');
-$user = $config['dbname'];
-$pass = $config['username'];
-$dbname = $config['pass'];
+$user = $config['user'];
+$pass = $config['pass'];
+$dbname = $config['dbname'];
 
-var_dump($user);
-var_dump($pass);
-var_dump($dbname);
 try {
     $dbh = new PDO("mysql:host=localhost;dbname=$dbname", $user, $pass);
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
