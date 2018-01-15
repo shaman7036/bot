@@ -4,9 +4,10 @@ $user = $config['user'];
 $pass = $config['pass'];
 $dbname = $config['dbname'];
 
+const $pdo;
 try {
-    $dbh = new PDO("mysql:host=localhost;dbname=$dbname", $user, $pass);
-    $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $pdo = new PDO("mysql:host=localhost;dbname=$dbname", $user, $pass);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     //die(json_encode(array('outcome' => true)));
 }
 catch(PDOException $ex){
