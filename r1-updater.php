@@ -33,11 +33,10 @@ var_dump($_POST['data']);
 //LastVisitDateTime = last_visit
 //TelefoneCell = phone_number
 
-$received_data = $_POST['data'];
+$received_data = trim($_POST['data']);
 $arr = [];
 foreach(preg_split("/((\r?\n)|(\r\n?))/", $received_data) as $line){
   $temparr = explode("|", $line);
-  var_dump($temparr);
   $newarr = array(
     'id' => $temparr[0],
     'visits_left' => $temparr[1],
@@ -45,8 +44,6 @@ foreach(preg_split("/((\r?\n)|(\r\n?))/", $received_data) as $line){
     'last_visit' => $temparr[3],
     'phone_number' => $temparr[4]
   );
-  var_dump($newarr);
-  
 } 
  var_dump($arr);
 
