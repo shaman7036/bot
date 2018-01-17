@@ -13,7 +13,7 @@ use Viber\Bot;
 use Viber\Api\Sender;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
-$config = require('./config.php');
+$config = require('../botconfig.php');
 $apiKey = $config['apiKey'];
 // reply name
 $botSender = new Sender([
@@ -48,21 +48,21 @@ try {
                             ->setBgColor('#2fa4e7')
                             ->setTextHAlign('center')
                             ->setActionType('reply')
-                            ->setActionBody('btn-click')
+                            ->setActionBody('btn2-click')
                             ->setText('Оставшееся количество занятий'),
                             (new \Viber\Api\Keyboard\Button())
                             ->setBgColor('#00BFFF')
                             ->setTextSize('large')
                             ->setTextHAlign('center')
                             ->setActionType('reply')
-                            ->setActionBody('btn-click')
+                            ->setActionBody('btn3-click')
                             ->setText('Последнее посещение'),
                             (new \Viber\Api\Keyboard\Button())
                             ->setBgColor('#20B2AA')
                             ->setTextSize('large')
                             ->setTextHAlign('center')
                             ->setActionType('reply')
-                            ->setActionBody('btn-click')
+                            ->setActionBody('btn4-click')
                             ->setText('Депозитный счет'),
                         ])
                     );
@@ -77,6 +77,32 @@ try {
             ->setText('Thanks for subscription!')
         );
     })
+
+    ->onText('|btn2-click|s', function ($event) use ($bot, $botSender, $log) {
+        $log->info('click on button');
+        $receiverId = $event->getSender()->getId();
+     $bot->getClient()->sendMessage(
+            (new \Viber\Api\Message\())
+                    ->setSender($botSender)
+                    ->setReceiver($receiverId)
+                    ->setKeyboard(
+                        (new \Viber\Api\Keyboard())
+                        ->setButtons([
+                            (new \Viber\Api\Keyboard\Button())
+                            ->setBgColor('#8074d6')
+                            ->setTextSize('large')
+                            ->setTextHAlign('center')
+                            ->setActionType('reply')
+                            ->setActionBody('setphone-click')
+                            ->setText('Указать номер телефона'),
+                          
+                        ]))
+        );
+          
+        
+    })
+    
+    
     ->onText('|btn1-click|s', function ($event) use ($bot, $botSender, $log) {
         $log->info('click on button');
         $receiverId = $event->getSender()->getId();
