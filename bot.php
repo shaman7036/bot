@@ -45,25 +45,13 @@ try {
                             ->setActionBody('btn1-click')
                             ->setText('Контактная Информация'),
                             (new \Viber\Api\Keyboard\Button())
-                            ->setBgColor('#2fa4e7')
-                            ->setTextHAlign('center')
-                            ->setActionType('reply')
-                            ->setActionBody('btn2-click')
-                            ->setText('Оставшееся количество занятий'),
-                            (new \Viber\Api\Keyboard\Button())
                             ->setBgColor('#00BFFF')
                             ->setTextSize('large')
                             ->setTextHAlign('center')
                             ->setActionType('reply')
-                            ->setActionBody('btn3-click')
-                            ->setText('Последнее посещение'),
-                            (new \Viber\Api\Keyboard\Button())
-                            ->setBgColor('#20B2AA')
-                            ->setTextSize('large')
-                            ->setTextHAlign('center')
-                            ->setActionType('reply')
-                            ->setActionBody('btn4-click')
-                            ->setText('Депозитный счет'),
+                            ->setActionBody('btn2-click')
+                            ->setText('Информация для клиента'),
+                           
                         ])
                     );
     })
@@ -85,7 +73,7 @@ try {
             (new \Viber\Api\Message\Text())
                     ->setSender($botSender)
                     ->setReceiver($receiverId)
-                    ->setText('Нажмите на кнопку, что бы указать номер телефона.')
+                    ->setText('Нажмите на кнопку, что бы указать номер телефона, указанный при регистрации.')
                     ->setKeyboard(
                         (new \Viber\Api\Keyboard())
                         ->setButtons([
@@ -102,7 +90,61 @@ try {
           
         
     })
+    ->onText('|setphone-click|s', function ($event) use ($bot, $botSender, $log) {
+        $log->info('click on button');
+        $receiverId = $event->getSender()->getId();
+     $bot->getClient()->sendMessage(
+            (new \Viber\Api\Message\Text())
+                    ->setSender($botSender)
+                    ->setReceiver($receiverId)
+                    ->setText('Введите номер телефона c кодом оператора')
+                    ->setKeyboard(
+                        (new \Viber\Api\Keyboard())
+                        ->setButtons([
+                            (new \Viber\Api\Keyboard\Button())
+                            ->setBgColor('#8074d6')
+                            ->setTextSize('large')
+                            ->setTextHAlign('center')
+                            ->setActionType('reply')
+                            ->setActionBody('btn1-click')
+                            ->setText('Контактная Информация'),
+                            (new \Viber\Api\Keyboard\Button())
+                            ->setBgColor('#00BFFF')
+                            ->setTextSize('large')
+                            ->setTextHAlign('center')
+                            ->setActionType('reply')
+                            ->setActionBody('btn2-click')
+                            ->setText('Информация для клиента'),
+                           
+                        ]))
+                    
+                    );
+          
+        
+    })
+      ->onText('/^[\d\+]/', function ($event) use ($bot, $botSender, $log) {
+    $log->info('click on button');
+    $receiverId = $event->getSender()->getId();
     
+    $phone1 = $event->getMessage()->getText();
+    $phone = preg_replace("/[\s+\+]/", "", $phone1);
+    
+    $response = "";
+    if (strlen($phone)!= 12 && strlen($phone)!= 9) {
+     $response = strlen($phone)."invalid format".$phone;
+    } else {
+     ///zapros
+    }
+     $bot->getClient()->sendMessage(
+            (new \Viber\Api\Message\Text())
+                    ->setSender($botSender)
+                    ->setReceiver($receiverId)
+                    ->setText($response)
+                    
+                    );
+          
+        
+    })
     
     ->onText('|btn1-click|s', function ($event) use ($bot, $botSender, $log) {
         $log->info('click on button');
@@ -142,27 +184,15 @@ try {
                             ->setActionBody('btn1-click')
                             ->setText('Контактная Информация'),
                             (new \Viber\Api\Keyboard\Button())
-                            ->setBgColor('#2fa4e7')
-                            ->setTextHAlign('center')
-                            ->setActionType('reply')
-                            ->setActionBody('btn-click')
-                            ->setText('Оставшееся количество занятий'),
-                            (new \Viber\Api\Keyboard\Button())
                             ->setBgColor('#00BFFF')
                             ->setTextSize('large')
                             ->setTextHAlign('center')
                             ->setActionType('reply')
-                            ->setActionBody('btn-click')
-                            ->setText('Последнее посещение'),
-                            (new \Viber\Api\Keyboard\Button())
-                            ->setBgColor('#20B2AA')
-                            ->setTextSize('large')
-                            ->setTextHAlign('center')
-                            ->setActionType('reply')
-                            ->setActionBody('btn-click')
-                            ->setText('Депозитный счет'),
+                            ->setActionBody('btn2-click')
+                            ->setText('Информация для клиента'),
+                           
                         ]))
-        );
+                    );
           
         
     })
