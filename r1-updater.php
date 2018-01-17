@@ -7,8 +7,8 @@ $user = $config['updater_user'];
 $pass = $config['updater_pass'];
 
 function require_auth() {
-  $AUTH_USER = 'admin';
-  $AUTH_PASS = 'qwe123';
+  $AUTH_USER = $user;
+  $AUTH_PASS = $pass;
   header('Cache-Control: no-cache, must-revalidate, max-age=0');
   $has_supplied_credentials = !(empty($_SERVER['PHP_AUTH_USER']) && empty($_SERVER['PHP_AUTH_PW']));
   $is_not_authenticated = (
@@ -45,8 +45,8 @@ foreach(preg_split("/((\r?\n)|(\r\n?))/", $received_data) as $line){
     'LastName' => $temparr[2],
     'MiddleName' => $temparr[3],
     'LastVisitDateTime' => $temparr[4],
-    'TelefoneCell' => $temparr[5]
-    'Summ' => $temparr[6]
+    'TelefoneCell' => $temparr[5],
+    'Summ' => $temparr[6],
     'visits_left' => $temparr[7]
   );
 } 
