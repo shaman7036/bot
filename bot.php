@@ -13,6 +13,9 @@ function getUserData($phone, $pdo) {
     $stmt = $pdo->prepare("SELECT * FROM users WHERE TelefoneCell like ? limit 1");
     $stmt->bindValue(1, "%$phone", PDO::PARAM_STR);
     $stmt->execute();
+    if (!$stmt->rowCount()) {
+        return "Информация о клиенте отсутствует";
+    }
     $user = $stmt->fetchAll()[0];
     $e = NULL;
     $response = "Пользователь: $user[LastName] $user[Name] $user[MiddleName]\n"
@@ -143,7 +146,7 @@ try {
     
     $response = "1";
     if (strlen($phone)!= 12 && strlen($phone)!= 9) {
-     $response = strlen($phone)."invalid format".$phone;
+     $response = "Укажите номер с кодом оператора.";
     } else {
         $pdo = require("./connection.php");
         $response = getUserData($phone, $pdo);
@@ -153,6 +156,25 @@ try {
                     ->setSender($botSender)
                     ->setReceiver($receiverId)
                     ->setText($response)
+                    ->setKeyboard(
+                        (new \Viber\Api\Keyboard())
+                        ->setButtons([
+                            (new \Viber\Api\Keyboard\Button())
+                            ->setBgColor('#8074d6')
+                            ->setTextSize('large')
+                            ->setTextHAlign('center')
+                            ->setActionType('reply')
+                            ->setActionBody('btn1-click')
+                            ->setText('Контактная Информация'),
+                            (new \Viber\Api\Keyboard\Button())
+                            ->setBgColor('#00BFFF')
+                            ->setTextSize('large')
+                            ->setTextHAlign('center')
+                            ->setActionType('reply')
+                            ->setActionBody('btn2-click')
+                            ->setText('Информация для клиента'),
+                           
+                        ]))
                     
                     );
           
