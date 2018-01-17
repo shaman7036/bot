@@ -1,8 +1,8 @@
 <?php 
-$config = require('./config.php');
-$user = $config['user'];
-$pass = $config['pass'];
+$config = require('./../botconfig.php');
 $dbname = $config['dbname'];
+$user = $config['dbuser'];
+$pass = $config['dbpass'];
 
 try {
     $pdo = new PDO("mysql:host=localhost;dbname=$dbname", $user, $pass);

@@ -1,6 +1,11 @@
 <?php 
 error_reporting(E_ALL);
 ini_set('display_errors', 'on');
+
+$config = require('./../botconfig.php');
+$user = $config['updater_user'];
+$pass = $config['updater_pass'];
+
 function require_auth() {
   $AUTH_USER = 'admin';
   $AUTH_PASS = 'qwe123';
@@ -35,14 +40,17 @@ $arr = [];
 foreach(preg_split("/((\r?\n)|(\r\n?))/", $received_data) as $line){
   $temparr = explode("|", $line);
   $arr[] = array(
-    'id' => $temparr[0],
-    'visits_left' => $temparr[1],
-    'deposit_account' => $temparr[2],
-    'last_visit' => $temparr[3],
-    'phone_number' => $temparr[4]
+    'OID' => $temparr[0],
+    'Name' => $temparr[1],
+    'LastName' => $temparr[2],
+    'MiddleName' => $temparr[3],
+    'LastVisitDateTime' => $temparr[4],
+    'TelefoneCell' => $temparr[5]
+    'Summ' => $temparr[6]
+    'visits_left' => $temparr[7]
   );
 } 
-pdoMultiInsert('user_data', $arr, $pdo);
+pdoMultiInsert('user', $arr, $pdo);
 echo "done.";
 // $stmt = $pdo->prepare("SELECT * FROM user_data WHERE phone_number= )");
 // $stmt->execute();
