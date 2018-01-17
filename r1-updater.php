@@ -46,7 +46,7 @@ foreach(preg_split("/((\r?\n)|(\r\n?))/", $received_data) as $line){
     'visits_left' => $temparr[7]
   );
 } 
-pdoMultiInsert('user', $arr, $pdo);
+pdoMultiInsert('users', $arr, $pdo);
 echo "done.";
 // $stmt = $pdo->prepare("SELECT * FROM user_data WHERE phone_number= )");
 // $stmt->execute();
