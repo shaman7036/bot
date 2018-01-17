@@ -9,6 +9,18 @@ ini_set('display_errors', 'on');
  * @author Novikov Bogdan <hcbogdan@gmail.com>
  */
 require_once("./vendor/autoload.php");
+function getUserData($phone, $pdo) {
+    $stmt = $pdo->prepare("SELECT * FROM users WHERE TelefoneCell like ? limit 1");
+    $stmt->bindValue(1, "%$phone", PDO::PARAM_STR);
+    $stmt->execute();
+    $user = $stmt->fetchAll()[0];
+    $e = NULL;
+    $response = "Пользователь: $user[LastName] $user[Name] $user[MiddleName]\n"
+                ."Осталось посещений: ".($user[visits_left] ? $user[visits_left] : 0)."\n"
+                ."Депозитный счет: ".($user[Summ] ? $user[Summ] : 0)." руб.\n"
+                ."Последний визит: $user[LastVisitDateTime]";
+    return $response;
+}
 use Viber\Bot;
 use Viber\Api\Sender;
 use Monolog\Logger;
@@ -22,7 +34,7 @@ $botSender = new Sender([
 ]);
 // log bot interaction
 $log = new Logger('bot');
-$log->pushHandler(new StreamHandler('/tmp/bot.log'));
+$log->pushHandler(new StreamHandler('./tmp/bot.log'));
 $bot = null;
 try {
     // create bot instance
@@ -129,11 +141,12 @@ try {
     $phone1 = $event->getMessage()->getText();
     $phone = preg_replace("/[\s+\+]/", "", $phone1);
     
-    $response = "";
+    $response = "1";
     if (strlen($phone)!= 12 && strlen($phone)!= 9) {
      $response = strlen($phone)."invalid format".$phone;
     } else {
-     ///zapros
+        $pdo = require("./connection.php");
+        $response = getUserData($phone, $pdo);
     }
      $bot->getClient()->sendMessage(
             (new \Viber\Api\Message\Text())
