@@ -13,7 +13,7 @@ use Viber\Bot;
 use Viber\Api\Sender;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
-$config = require('../botconfig.php');
+$config = require('./../botconfig.php');
 $apiKey = $config['apiKey'];
 // reply name
 $botSender = new Sender([
@@ -82,9 +82,10 @@ try {
         $log->info('click on button');
         $receiverId = $event->getSender()->getId();
      $bot->getClient()->sendMessage(
-            (new \Viber\Api\Message\())
+            (new \Viber\Api\Message\Text())
                     ->setSender($botSender)
                     ->setReceiver($receiverId)
+                    ->setText('Нажмите на кнопку, что бы указать номер телефона.')
                     ->setKeyboard(
                         (new \Viber\Api\Keyboard())
                         ->setButtons([
@@ -94,7 +95,7 @@ try {
                             ->setTextHAlign('center')
                             ->setActionType('reply')
                             ->setActionBody('setphone-click')
-                            ->setText('Указать номер телефона'),
+                            ->setText('Указать номер'),
                           
                         ]))
         );
