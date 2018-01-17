@@ -24,12 +24,6 @@ if (!isset($_POST['data'])) {
   die;
 }
 require('./connection.php');
-//id|visits_left|deposit_account|last_visit|phone_number
-//OID = id
-//??? = visits_left
-//??? = deposit_account
-//LastVisitDateTime = last_visit
-//TelefoneCell = phone_number
 
 $received_data = trim($_POST['data']);
 $arr = [];
@@ -48,10 +42,6 @@ foreach(preg_split("/((\r?\n)|(\r\n?))/", $received_data) as $line){
 } 
 pdoMultiInsert('users', $arr, $pdo);
 echo "done.";
-// $stmt = $pdo->prepare("SELECT * FROM user_data WHERE phone_number= )");
-// $stmt->execute();
-// var_dump($stmt->fetchAll());
-
 
 function pdoMultiInsert($tableName, $data, $pdoObject){
     
