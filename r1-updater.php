@@ -1,14 +1,10 @@
 <?php 
 error_reporting(E_ALL);
 ini_set('display_errors', 'on');
-
-$config = require('./../botconfig.php');
-$user = $config['updater_user'];
-$pass = $config['updater_pass'];
-
 function require_auth() {
-  $AUTH_USER = $user;
-  $AUTH_PASS = $pass;
+  $config = require('./../botconfig.php');
+  $AUTH_USER = $config['updater_user'];
+  $AUTH_PASS = $config['updater_pass'];
   header('Cache-Control: no-cache, must-revalidate, max-age=0');
   $has_supplied_credentials = !(empty($_SERVER['PHP_AUTH_USER']) && empty($_SERVER['PHP_AUTH_PW']));
   $is_not_authenticated = (
